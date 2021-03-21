@@ -1,5 +1,5 @@
 export default class Participant {
-  id: string;
+  key: string;
   name: string;
   mobile: number;
   idNumber: string;

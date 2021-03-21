@@ -25,13 +25,14 @@
             [arrow]="'horizontal'"
             multipleLine
             wrap
+            (onClick)="!participant.isParticipated ? showActionSheet(participant): 0;"
   >
     <ng-template #listExtra>
       <span style="color: black;font-size: medium; border: red solid; padding: 2px; ">
         <b>{{participant.table}}</b>
       </span>
     </ng-template>
-    <b>{{participant.name}}</b>
+    <b>{{participant.name}} ({{participant.key}})</b>
     <Brief>
       <b>From {{participant.isGroom ? 'Groom' : "Bride"}}</b>
       <br/>

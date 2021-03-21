@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {PaticipantService} from '../services/paticipant.service';
 import {map} from 'rxjs/operators';
 import Participant from '../models/participant.model';
+import {ActionSheetService, ToastService} from 'ng-zorro-antd-mobile';
 
 @Component({
   selector: 'app-paricipant-list',
@@ -19,7 +20,12 @@ export class ParicipantListComponent implements OnInit {
   filteredParticipants?: Participant[];
   searchBy = '';
   selectedType = 'All';
-  constructor(private element: ElementRef, private renderer: Renderer2, private participantSevice: PaticipantService) {
+
+  constructor(private element: ElementRef,
+              private renderer: Renderer2,
+              private participantSevice: PaticipantService,
+              private actionSheet: ActionSheetService,
+              private toast: ToastService) {
   }
 
   ngOnInit(): void {
@@ -121,5 +127,36 @@ export class ParicipantListComponent implements OnInit {
           .filter(o => o.name.toLowerCase().includes(this.searchBy.toLowerCase()) && o.isParticipated);
         break;
     }
+  }
+
+  private updateParticipated(participant: Participant){
+    this.participantSevice.update(participant.key, {isParticipated: true}).then((response) => {
+      const toast = this.toast.info('Marked as participated', 4000, null, false, 'bottom');
+    }).catch(err => {
+      this.toast.fail('Load failed !!!', 1000);
+    });
+  }
+
+  showActionSheet = (participant: Participant) => {
+    const BUTTONS = ['Mark as Participated', 'Cancel'];
+    this.actionSheet.showActionSheetWithOptions(
+      {
+        options: BUTTONS,
+        cancelButtonIndex: BUTTONS.length - 1,
+        destructiveButtonIndex: BUTTONS.length - 2,
+        title: participant.name,
+        message: 'This person participated',
+        maskClosable: true,
+      },
+      buttonIndex => {
+        switch (buttonIndex) {
+          case 0:
+            this.updateParticipated(participant);
+            break;
+          default:
+            break;
+        }
+      }
+    );
   }
 }

@@ -10,17 +10,17 @@ export class PaticipantService {
 
   private dbPath = '/participants';
 
-  tutorialsRef: AngularFireList<Participant>;
+  participantRef: AngularFireList<Participant>;
 
   constructor(private db: AngularFireDatabase) {
-    this.tutorialsRef = db.list(this.dbPath);
+    this.participantRef = db.list(this.dbPath);
   }
 
   getAll(): AngularFireList<Participant> {
-    return this.tutorialsRef;
+    return this.participantRef;
   }
 
   update(key: string, value: any): Promise<void> {
-    return this.tutorialsRef.update(key, value);
+    return this.participantRef.update(key, value);
   }
 }
