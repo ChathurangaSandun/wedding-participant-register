@@ -1,4 +1,7 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+import {PaticipantService} from '../services/paticipant.service';
+import {map} from 'rxjs/operators';
+import Participant from '../models/participant.model';
 
 @Component({
   selector: 'app-paricipant-list',
@@ -12,17 +15,36 @@ export class ParicipantListComponent implements OnInit {
     date: new Date()
   };
   checked = true;
-
-  constructor(private element: ElementRef, private renderer: Renderer2) { }
-
-  ngOnInit(): void {
+  participants?: Participant[];
+  filteredParticipants?: Participant[];
+  searchBy = '';
+  selectedType = 'All';
+  constructor(private element: ElementRef, private renderer: Renderer2, private participantSevice: PaticipantService) {
   }
 
-  public renderHeader2(): string{
+  ngOnInit(): void {
+    this.retrieveParticipants();
+  }
+
+  retrieveParticipants(): void {
+    this.participantSevice.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({key: c.payload.key, ...c.payload.val()})
+        )
+      )
+    ).subscribe(data => {
+      this.participants = data;
+      this.filteredParticipants = this.participants;
+      this.filterParicipants();
+    });
+  }
+
+  public renderHeader2(): string {
     return 'Paticipants';
   }
 
-  public extra(): string{
+  public extra(): string {
     return 'Paticipants';
   }
 
@@ -31,7 +53,8 @@ export class ParicipantListComponent implements OnInit {
   }
 
   change($event) {
-    console.log($event, 'onChange');
+    this.searchBy = $event;
+    this.filterParicipants();
   }
 
   submit(value) {
@@ -39,7 +62,9 @@ export class ParicipantListComponent implements OnInit {
   }
 
   clear(value) {
-    console.log(value, 'onClear');
+    this.searchBy = '';
+    this.filteredParticipants = this.participants;
+    this.filterParicipants();
   }
 
   focus() {
@@ -51,7 +76,9 @@ export class ParicipantListComponent implements OnInit {
   }
 
   cancel() {
-    console.log('onCancel');
+    this.searchBy = '';
+    this.filteredParticipants = this.participants;
+    this.filterParicipants();
   }
 
   handleClick() {
@@ -69,4 +96,30 @@ export class ParicipantListComponent implements OnInit {
     console.log(event);
   }
 
+  choose(event) {
+    this.selectedType = event.value;
+    this.filterParicipants();
+  }
+
+
+  private filterParicipants() {
+    switch (this.selectedType) {
+      case 'All':
+        this.filteredParticipants = this.participants
+          .filter(o => o.name.toLowerCase().includes(this.searchBy.toLowerCase()) && !o.isParticipated);
+        break;
+      case 'Groom':
+        this.filteredParticipants = this.participants
+          .filter(o => o.name.toLowerCase().includes(this.searchBy.toLowerCase()) && o.isGroom && !o.isParticipated);
+        break;
+      case 'Bride':
+        this.filteredParticipants = this.participants
+          .filter(o => o.name.toLowerCase().includes(this.searchBy.toLowerCase()) && !o.isGroom && !o.isParticipated);
+        break;
+      case  'Participated':
+        this.filteredParticipants = this.participants
+          .filter(o => o.name.toLowerCase().includes(this.searchBy.toLowerCase()) && o.isParticipated);
+        break;
+    }
+  }
 }

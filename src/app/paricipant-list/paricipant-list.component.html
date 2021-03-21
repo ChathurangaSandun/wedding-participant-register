@@ -1,63 +1,44 @@
-<!--<div style="margin: 11px">-->
-<!--  <SearchBar-->
-<!--    [(ngModel)]="value"-->
-<!--    [placeholder]="'Search'"-->
-<!--    [showCancelButton]="true"-->
-<!--    [cancelText]="'Cancel'"-->
-<!--    (onBlur)="blur()"-->
-<!--    (onFocus)="focus()"-->
-<!--    (onCancel)="cancel()"-->
-<!--    (onClear)="clear(value)"-->
-<!--    (onSubmit)="submit(value)"-->
-<!--    (onChange)="change($event)"-->
-<!--  ></SearchBar>-->
-<!--</div>-->
-<WingBlank [size]="'sm'" >
+<WingBlank [size]="'sm'">
+  <WhiteSpace [size]="'sm'"></WhiteSpace>
+<!--  <InputItem [clear]="true" [placeholder]="''" [content]="'Find'"-->
+<!--             xmlns="http://www.w3.org/1999/html"></InputItem>-->
 
-    <SearchBar
-      [(ngModel)]="value"
-      [placeholder]="'Search'"
-      [showCancelButton]="true"
-      [cancelText]="'Cancel'"
-      (onBlur)="blur()"
-      (onFocus)="focus()"
-      (onCancel)="cancel()"
-      (onClear)="clear(value)"
-      (onSubmit)="submit(value)"
-      (onChange)="change($event)"
-    ></SearchBar>
-
-
-<InputItem [clear]="true" [placeholder]="''" [content]="'Find'" style="margin: 10px"
-           xmlns="http://www.w3.org/1999/html"></InputItem>
+      <SearchBar
+        [(ngModel)]="value"
+        [placeholder]="'Search'"
+        [showCancelButton]="true"
+        [cancelText]="'Cancel'"
+        (onBlur)="blur()"
+        (onFocus)="focus()"
+        (onCancel)="cancel()"
+        (onClear)="clear(value)"
+        (onSubmit)="submit(value)"
+        (onChange)="change($event)"
+      ></SearchBar>
+  <WhiteSpace [size]="'sm'"></WhiteSpace>
+  <SegmentedControl [values]="['All', 'Groom', 'Bride', 'Participated']" (onChange)="choose($event)"></SegmentedControl>
 </WingBlank>
 
-
-<List [className]="'my-list'" [renderHeader]="renderHeader2">
-  <ListItem *ngFor="let i of [].constructor(250)"
+<WhiteSpace [size]="'sm'"></WhiteSpace>
+<List [className]="'my-list'" [renderHeader]="''">
+  <ListItem *ngFor="let participant of filteredParticipants"
             [extra]="listExtra"
+            [arrow]="'horizontal'"
             multipleLine
+            wrap
   >
-    <ng-template #thumb>
-      <span>25</span>
-    </ng-template>
     <ng-template #listExtra>
-      <Switch
-        [checked]="checked"
-        [platform]="'ios'"
-        (onChange)="check($event)"
-        (onClick)="onClickSwitch($event)"
-      ></Switch>
+      <span style="color: black;font-size: medium; border: red solid; padding: 2px; ">
+        <b>{{participant.table}}</b>
+      </span>
     </ng-template>
-    Thathuranga sandun
+    <b>{{participant.name}}</b>
     <Brief>
-      Horana
+      <b>From {{participant.isGroom ? 'Groom' : "Bride"}}</b>
       <br/>
-      0718256773
+      {{participant.mobile}}
       <br/>
-      922760047v
-      <br/>
-
+      {{participant.idNumber}}
     </Brief>
 
   </ListItem>
