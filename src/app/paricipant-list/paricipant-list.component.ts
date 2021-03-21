@@ -11,6 +11,7 @@ export class ParicipantListComponent implements OnInit {
     focusValue: false,
     date: new Date()
   };
+  checked = true;
 
   constructor(private element: ElementRef, private renderer: Renderer2) { }
 
@@ -18,6 +19,10 @@ export class ParicipantListComponent implements OnInit {
   }
 
   public renderHeader2(): string{
+    return 'Paticipants';
+  }
+
+  public extra(): string{
     return 'Paticipants';
   }
 
@@ -54,6 +59,14 @@ export class ParicipantListComponent implements OnInit {
       focusValue: true,
       date: new Date()
     };
+  }
+
+  check(event) {
+    console.log(event);
+  }
+
+  onClickSwitch(event) {
+    console.log(event);
   }
 
 }

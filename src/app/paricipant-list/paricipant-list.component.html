@@ -12,20 +12,54 @@
 <!--    (onChange)="change($event)"-->
 <!--  ></SearchBar>-->
 <!--</div>-->
-<div style="margin: 5px 20px 5px 10px;">
-  <InputItem [clear]="true" [placeholder]="''" [content]="'Find'"></InputItem>
-</div>
+<WingBlank [size]="'sm'" >
+
+    <SearchBar
+      [(ngModel)]="value"
+      [placeholder]="'Search'"
+      [showCancelButton]="true"
+      [cancelText]="'Cancel'"
+      (onBlur)="blur()"
+      (onFocus)="focus()"
+      (onCancel)="cancel()"
+      (onClear)="clear(value)"
+      (onSubmit)="submit(value)"
+      (onChange)="change($event)"
+    ></SearchBar>
+
+
+<InputItem [clear]="true" [placeholder]="''" [content]="'Find'" style="margin: 10px"
+           xmlns="http://www.w3.org/1999/html"></InputItem>
+</WingBlank>
+
 
 <List [className]="'my-list'" [renderHeader]="renderHeader2">
   <ListItem *ngFor="let i of [].constructor(250)"
-
-            [extra]="'10:30'"
-            [align]="'top'"
-            [thumb]="'https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png'"
+            [extra]="listExtra"
             multipleLine
   >
-    Title
-    <Brief>subtitle</Brief>
+    <ng-template #thumb>
+      <span>25</span>
+    </ng-template>
+    <ng-template #listExtra>
+      <Switch
+        [checked]="checked"
+        [platform]="'ios'"
+        (onChange)="check($event)"
+        (onClick)="onClickSwitch($event)"
+      ></Switch>
+    </ng-template>
+    Thathuranga sandun
+    <Brief>
+      Horana
+      <br/>
+      0718256773
+      <br/>
+      922760047v
+      <br/>
+
+    </Brief>
+
   </ListItem>
 </List>
 
