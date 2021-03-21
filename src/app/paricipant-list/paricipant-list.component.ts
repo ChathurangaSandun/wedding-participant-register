@@ -129,7 +129,7 @@ export class ParicipantListComponent implements OnInit {
     }
   }
 
-  private updateParticipated(participant: Participant){
+  private updateParticipated(participant: Participant) {
     this.participantSevice.update(participant.key, {isParticipated: true}).then((response) => {
       const toast = this.toast.info('Marked as participated', 4000, null, false, 'bottom');
     }).catch(err => {
@@ -158,5 +158,5 @@ export class ParicipantListComponent implements OnInit {
         }
       }
     );
-  }
+  };
 }
