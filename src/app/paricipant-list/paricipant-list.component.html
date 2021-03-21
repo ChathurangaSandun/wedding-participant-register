@@ -1,17 +1,19 @@
-<div style="margin: 11px">
-  <SearchBar
-    [(ngModel)]="value"
-    [placeholder]="'Search'"
-    [showCancelButton]="true"
-    [cancelText]="'Cancel'"
-    (onBlur)="blur()"
-    (onFocus)="focus()"
-    (onCancel)="cancel()"
-    (onClear)="clear(value)"
-    (onSubmit)="submit(value)"
-    (onChange)="change($event)"
-  ></SearchBar>
-</div>
+<!--<div style="margin: 11px">-->
+<!--  <SearchBar-->
+<!--    [(ngModel)]="value"-->
+<!--    [placeholder]="'Search'"-->
+<!--    [showCancelButton]="true"-->
+<!--    [cancelText]="'Cancel'"-->
+<!--    (onBlur)="blur()"-->
+<!--    (onFocus)="focus()"-->
+<!--    (onCancel)="cancel()"-->
+<!--    (onClear)="clear(value)"-->
+<!--    (onSubmit)="submit(value)"-->
+<!--    (onChange)="change($event)"-->
+<!--  ></SearchBar>-->
+<!--</div>-->
+
+<InputItem [clear]="true" [placeholder]="'displayed clear while typing'" [content]="'Search'"></InputItem>
 
 <div style="margin: 10px">
   <List [className]="'my-list'" [renderHeader]="renderHeader2">
