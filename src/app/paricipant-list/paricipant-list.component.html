@@ -1,8 +1,8 @@
-<div style="margin: 20px">
+<div style="margin: 11px">
   <SearchBar
     [(ngModel)]="value"
     [placeholder]="'Search'"
-    [showCancelButton]="false"
+    [showCancelButton]="true"
     [cancelText]="'Cancel'"
     (onBlur)="blur()"
     (onFocus)="focus()"
@@ -13,16 +13,17 @@
   ></SearchBar>
 </div>
 
-<List [className]="'my-list'" [renderHeader]="renderHeader2">
-  <ListItem *ngFor="let i of [].constructor(250)"
+<div style="margin: 10px">
+  <List [className]="'my-list'" [renderHeader]="renderHeader2">
+    <ListItem *ngFor="let i of [].constructor(250)"
 
-            [extra]="'10:30'"
-            [align]="'top'"
-            [thumb]="'https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png'"
-            multipleLine
-  >
-    Title
-    <Brief>subtitle</Brief>
-  </ListItem>
-</List>
-
+              [extra]="'10:30'"
+              [align]="'top'"
+              [thumb]="'https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png'"
+              multipleLine
+    >
+      Title
+      <Brief>subtitle</Brief>
+    </ListItem>
+  </List>
+</div>
