@@ -1,20 +1,19 @@
 <WingBlank [size]="'sm'">
   <WhiteSpace [size]="'sm'"></WhiteSpace>
-<!--  <InputItem [clear]="true" [placeholder]="''" [content]="'Find'"-->
-<!--             xmlns="http://www.w3.org/1999/html"></InputItem>-->
-
-      <SearchBar
-        [(ngModel)]="value"
-        [placeholder]="'Search'"
-        [showCancelButton]="true"
-        [cancelText]="'Cancel'"
-        (onBlur)="blur()"
-        (onFocus)="focus()"
-        (onCancel)="cancel()"
-        (onClear)="clear(value)"
-        (onSubmit)="submit(value)"
-        (onChange)="change($event)"
-      ></SearchBar>
+  <InputItem [clear]="true" [placeholder]="''" [content]="'Find'" (onChange)="change($event)"
+             xmlns="http://www.w3.org/1999/html"></InputItem>
+<!--      <SearchBar-->
+<!--        [(ngModel)]="value"-->
+<!--        [placeholder]="'Search'"-->
+<!--        [showCancelButton]="true"-->
+<!--        [cancelText]="'Cancel'"-->
+<!--        (onBlur)="blur()"-->
+<!--        (onFocus)="focus()"-->
+<!--        (onCancel)="cancel()"-->
+<!--        (onClear)="clear(value)"-->
+<!--        (onSubmit)="submit(value)"-->
+<!--        (onChange)="change($event)"-->
+<!--      ></SearchBar>-->
   <WhiteSpace [size]="'sm'"></WhiteSpace>
   <SegmentedControl [values]="['All', 'Groom', 'Bride', 'Participated']" (onChange)="choose($event)"></SegmentedControl>
 </WingBlank>
