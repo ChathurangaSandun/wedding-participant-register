@@ -12,20 +12,20 @@
 <!--    (onChange)="change($event)"-->
 <!--  ></SearchBar>-->
 <!--</div>-->
-
-<InputItem [clear]="true" [placeholder]="'displayed clear while typing'" [content]="'Search'"></InputItem>
-
-<div style="margin: 10px">
-  <List [className]="'my-list'" [renderHeader]="renderHeader2">
-    <ListItem *ngFor="let i of [].constructor(250)"
-
-              [extra]="'10:30'"
-              [align]="'top'"
-              [thumb]="'https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png'"
-              multipleLine
-    >
-      Title
-      <Brief>subtitle</Brief>
-    </ListItem>
-  </List>
+<div style="margin: 5px 20px 5px 10px;">
+  <InputItem [clear]="true" [placeholder]="''" [content]="'Find'"></InputItem>
 </div>
+
+<List [className]="'my-list'" [renderHeader]="renderHeader2">
+  <ListItem *ngFor="let i of [].constructor(250)"
+
+            [extra]="'10:30'"
+            [align]="'top'"
+            [thumb]="'https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png'"
+            multipleLine
+  >
+    Title
+    <Brief>subtitle</Brief>
+  </ListItem>
+</List>
+
