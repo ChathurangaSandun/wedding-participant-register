@@ -10,6 +10,7 @@ import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
     NgZorroAntdMobileModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
