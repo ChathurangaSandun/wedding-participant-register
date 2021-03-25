@@ -60,6 +60,7 @@ export class ParicipantListComponent implements OnInit {
 
   change($event) {
     this.searchBy = $event;
+    debugger
     this.filterParicipants();
   }
 
@@ -113,22 +114,22 @@ export class ParicipantListComponent implements OnInit {
       case 'All':
         this.filteredParticipants = this.participants
           .filter(o => (o.name.toLowerCase().includes(this.searchBy.toLowerCase())
-            || o.table.toLowerCase().includes(this.searchBy.toLowerCase())) && !o.isParticipated);
+            || o.table.toString().toLowerCase().includes(this.searchBy.toLowerCase())) && !o.isParticipated);
         break;
       case 'Groom':
         this.filteredParticipants = this.participants
           .filter(o => (o.name.toLowerCase().includes(this.searchBy.toLowerCase())
-            || o.table.toLowerCase().includes(this.searchBy.toLowerCase())) && o.isGroom && !o.isParticipated);
+            || o.table.toString().toLowerCase().includes(this.searchBy.toLowerCase())) && o.isGroom && !o.isParticipated);
         break;
       case 'Bride':
         this.filteredParticipants = this.participants
           .filter(o => (o.name.toLowerCase().includes(this.searchBy.toLowerCase())
-            || o.table.toLowerCase().includes(this.searchBy.toLowerCase())) && !o.isGroom && !o.isParticipated);
+            || o.table.toString().toLowerCase().includes(this.searchBy.toLowerCase())) && !o.isGroom && !o.isParticipated);
         break;
       case  'Participated':
         this.filteredParticipants = this.participants
           .filter(o => (o.name.toLowerCase().includes(this.searchBy.toLowerCase())
-            || o.table.toLowerCase().includes(this.searchBy.toLowerCase())) && o.isParticipated);
+            || o.table.toString().toLowerCase().includes(this.searchBy.toLowerCase())) && o.isParticipated);
         break;
     }
   }
